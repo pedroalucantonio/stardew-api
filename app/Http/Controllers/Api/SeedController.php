@@ -3,47 +3,48 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Seed;
 use Illuminate\Http\Request;
 
 class SeedController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+        public function index()
     {
-        //
+        $seeds = Seed::all();
+
+        return response()->json($seeds);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $seed = Seed::create($request->all());
+
+        return response()->json($seed, 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(int $id)
     {
-        //
+        $seed = Seed::findOrFail($id);
+
+        return response()->json($seed);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, int $id)
     {
-        //
+        $seed = Seed::findOrFail($id);
+        $seed->update($request->all());
+
+        return response()->json($seed);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
-        //
+        $seed = Seed::findOrFail($id);
+        $seed->delete();
+
+        return response()->noContent();
     }
 }

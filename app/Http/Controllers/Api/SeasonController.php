@@ -16,36 +16,10 @@ class SeasonController extends Controller
         return response()->json($seasons);
     }
 
-    public function store(Request $request)
-    {
-        $season = Season::create($request->all());
-
-        return response()->json($season, 201);
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(int $id)
     {
         $season = Season::findOrFail($id);
 
         return response()->json($season);
-    }
-
-    public function update(Request $request, int $id)
-    {
-        $season = Season::findOrFail($id);
-        $season->update($request->all());
-
-        return response()->json($season);
-    }
-
-    public function destroy(int $id)
-    {
-        $season = Season::findOrFail($id);
-        $season->delete();
-
-        return response()->noContent();
     }
 }
