@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('seasons', function (Blueprint $table) {
             $table->id();
-            $table->enum('name', ['all', 'fall', 'winter', 'spring', 'summer'])->default('all');
+            $table->enum('name', ['fall', 'winter', 'spring', 'summer'])->default('fall');
             $table->text('description');
         });
     }

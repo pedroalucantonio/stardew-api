@@ -9,42 +9,117 @@ class SeedSeeder extends Seeder
 {
     public function run(): void
     {
-        $now = now();
-        
-
-        $books = [
-            // Fantasy
-            ['genre' => 'Fantasy', 'title' => 'The Hobbit', 'author' => 'J.R.R. Tolkien', 'pages' => 310, 'status' => 'finished', 'rating' => 5],
-            ['genre' => 'Fantasy', 'title' => 'A Game of Thrones', 'author' => 'George R.R. Martin', 'pages' => 694, 'status' => 'reading', 'rating' => null],
-            ['genre' => 'Fantasy', 'title' => 'The Name of the Wind', 'author' => 'Patrick Rothfuss', 'pages' => 662, 'status' => 'to_read', 'rating' => null],
-
-            // Science Fiction
-            ['genre' => 'Science Fiction', 'title' => 'Dune', 'author' => 'Frank Herbert', 'pages' => 412, 'status' => 'finished', 'rating' => 5],
-            ['genre' => 'Science Fiction', 'title' => 'The Martian', 'author' => 'Andy Weir', 'pages' => 369, 'status' => 'finished', 'rating' => 4],
-            ['genre' => 'Science Fiction', 'title' => 'Neuromancer', 'author' => 'William Gibson', 'pages' => 271, 'status' => 'to_read', 'rating' => null],
-
-            // Romance
-            ['genre' => 'Romance', 'title' => 'Pride and Prejudice', 'author' => 'Jane Austen', 'pages' => 279, 'status' => 'finished', 'rating' => 4],
-            ['genre' => 'Romance', 'title' => 'Me Before You', 'author' => 'Jojo Moyes', 'pages' => 369, 'status' => 'reading', 'rating' => null],
-            ['genre' => 'Romance', 'title' => 'The Notebook', 'author' => 'Nicholas Sparks', 'pages' => 214, 'status' => 'to_read', 'rating' => null],
-
-            // Mystery
-            ['genre' => 'Mystery', 'title' => 'And Then There Were None', 'author' => 'Agatha Christie', 'pages' => 272, 'status' => 'finished', 'rating' => 5],
-            ['genre' => 'Mystery', 'title' => 'The Girl with the Dragon Tattoo', 'author' => 'Stieg Larsson', 'pages' => 465, 'status' => 'finished', 'rating' => 4],
-            ['genre' => 'Mystery', 'title' => 'Gone Girl', 'author' => 'Gillian Flynn', 'pages' => 415, 'status' => 'reading', 'rating' => null],
+        $seeds = [
+            [
+                'name' => 'Parsnip Seeds',
+                'price' => 20,
+                'days-to-grow' => 4,
+                'regrowable' => false,
+                'regrow-days' => null,
+            ],
+            [
+                'name' => 'Bean Starter',
+                'price' => 60,
+                'days-to-grow' => 10,
+                'regrowable' => true,
+                'regrow-days' => 3,
+            ],
+            [
+                'name' => 'Cauliflower Seeds',
+                'price' => 80,
+                'days-to-grow' => 12,
+                'regrowable' => false,
+                'regrow-days' => null,
+            ],
+            [
+                'name' => 'Potato Seeds',
+                'price' => 50,
+                'days-to-grow' => 6,
+                'regrowable' => false,
+                'regrow-days' => null,
+            ],
+            [
+                'name' => 'Kale Seeds',
+                'price' => 70,
+                'days-to-grow' => 6,
+                'regrowable' => false,
+                'regrow-days' => null,
+            ],
+            [
+                'name' => 'Strawberry Seeds',
+                'price' => 100,
+                'days-to-grow' => 8,
+                'regrowable' => true,
+                'regrow-days' => 4,
+            ],
+            [
+                'name' => 'Blueberry Seeds',
+                'price' => 80,
+                'days-to-grow' => 13,
+                'regrowable' => true,
+                'regrow-days' => 4,
+            ],
+            [
+                'name' => 'Melon Seeds',
+                'price' => 80,
+                'days-to-grow' => 12,
+                'regrowable' => false,
+                'regrow-days' => null,
+            ],
+            [
+                'name' => 'Tomato Seeds',
+                'price' => 50,
+                'days-to-grow' => 11,
+                'regrowable' => true,
+                'regrow-days' => 4,
+            ],
+            [
+                'name' => 'Hot Pepper Seeds',
+                'price' => 40,
+                'days-to-grow' => 5,
+                'regrowable' => true,
+                'regrow-days' => 3,
+            ],
+            [
+                'name' => 'Corn Seeds',
+                'price' => 150,
+                'days-to-grow' => 14,
+                'regrowable' => true,
+                'regrow-days' => 4,
+            ],
+            [
+                'name' => 'Pumpkin Seeds',
+                'price' => 100,
+                'days-to-grow' => 13,
+                'regrowable' => false,
+                'regrow-days' => null,
+            ],
+            [
+                'name' => 'Cranberry Seeds',
+                'price' => 240,
+                'days-to-grow' => 7,
+                'regrowable' => true,
+                'regrow-days' => 5,
+            ],
+            [
+                'name' => 'Yam Seeds',
+                'price' => 60,
+                'days-to-grow' => 10,
+                'regrowable' => false,
+                'regrow-days' => null,
+            ],
         ];
 
-        foreach ($books as $book) {
-            DB::table('books')->insert([
-                'genre_id'   => $genreIds[$book['genre']],
-                'title'      => $book['title'],
-                'author'     => $book['author'],
-                'pages'      => $book['pages'],
-                'status'     => $book['status'],
-                'rating'     => $book['rating'],
-                'created_at' => $now,
-                'updated_at' => $now,
-            ]);
+        foreach ($seeds as $seed) {
+            DB::table('seeds')->updateOrInsert(
+                ['name' => $seed['name']],
+                [
+                    'price' => $seed['price'],
+                    'days-to-grow' => $seed['days-to-grow'],
+                    'regrowable' => $seed['regrowable'],
+                    'regrow-days' => $seed['regrow-days'],
+                ]
+            );
         }
     }
 }
