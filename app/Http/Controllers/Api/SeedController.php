@@ -3,21 +3,25 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Seed;
+use App\Services\SeedService;
 use Illuminate\Http\Request;
 
 class SeedController extends Controller
 {
+        public function __construct(
+        private SeedService $seedService
+    ) {}
+
         public function index()
     {
-        $seeds = Seed::all();
+        $seeds = $this->seedService->listAll();
 
         return response()->json($seeds);
     }
 
     public function store(Request $request)
     {
-        $seed = Seed::create($request->all());
+        $seed = $this->seedService->create($request->all());
 
         return response()->json($seed, 201);
     }
@@ -27,23 +31,22 @@ class SeedController extends Controller
      */
     public function show(int $id)
     {
-        $seed = Seed::findOrFail($id);
+        $seed = $this->seedService->findById($id);
+        $seed->seasons->makeHidden('pivot');
 
         return response()->json($seed);
     }
 
     public function update(Request $request, int $id)
     {
-        $seed = Seed::findOrFail($id);
-        $seed->update($request->all());
+        $seed = $this->seedService->update($id, $request->all());
 
         return response()->json($seed);
     }
 
     public function destroy(int $id)
     {
-        $seed = Seed::findOrFail($id);
-        $seed->delete();
+        $this->seedService->delete($id);
 
         return response()->noContent();
     }
