@@ -20,5 +20,4 @@ class SeasonService
 
         return $season;
     }
-
 }

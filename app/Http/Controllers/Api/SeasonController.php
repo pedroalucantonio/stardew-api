@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SeasonResource;
 use App\Services\SeasonService;
-use Illuminate\Http\Request;
 
 class SeasonController extends Controller
 {
@@ -16,13 +16,13 @@ class SeasonController extends Controller
     {
         $seasons = $this->seasonService->listAll();
 
-        return response()->json($seasons);
+        return SeasonResource::collection($seasons);
     }
 
     public function show(int $id)
     {
         $season = $this->seasonService->findById($id);
 
-        return response()->json($season);
+        return SeasonResource::make($season);
     }
 }

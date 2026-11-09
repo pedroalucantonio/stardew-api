@@ -20,7 +20,7 @@ class StoreSeedRequest extends FormRequest
             'price' => ['required', 'integer', 'min:0', 'max:999999'],
             'days-to-grow' => ['required', 'integer', 'min:1', 'max:30'],
             'regrowable' => ['required', 'boolean'],
-            'regrow-days' => ['nullable', 'required_if:regrowable,true', 'integer', 'min:1', 'max:30'], 
+            'regrow-days' => ['nullable', 'required_if:regrowable,true', 'integer', 'min:1', 'max:30'],
         ];
     }
 }
