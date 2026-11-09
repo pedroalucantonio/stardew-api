@@ -16,13 +16,13 @@ class SeedService
 
     public function create(array $data): Seed
     {
-        if (($data['status'] ?? 'to_read') !== 'finished') {
-            $data['rating'] = null;
-        }
+        $seasons = $data['seasons'];
+        unset($data['seasons']);
 
         $seed = Seed::create($data);
+        $seed->seasons()->sync($seasons);
 
-        return $seed;
+        return $seed->load('seasons:id,name');
     }
 
     public function findById(int $id): Seed
@@ -35,6 +35,8 @@ class SeedService
     public function update(int $id, array $data): Seed
     {
         $seed = Seed::findOrFail($id);
+        $seasons = $data['seasons'] ?? null;
+        unset($data['seasons']);
         $seed->fill($data);
 
         if (! $seed->regrowable) {
@@ -43,7 +45,11 @@ class SeedService
 
         $seed->save();
 
-        return $seed;
+        if ($seasons !== null) {
+            $seed->seasons()->sync($seasons);
+        }
+
+        return $seed->load('seasons:id,name');
     }
 
     public function delete(int $id): void

@@ -12,6 +12,7 @@ class Seed extends Model
 
     protected $fillable = [
         'name',
+        'type',
         'price',
         'days-to-grow',
         'regrowable',

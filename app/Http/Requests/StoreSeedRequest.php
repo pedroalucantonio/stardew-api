@@ -17,6 +17,7 @@ class StoreSeedRequest extends FormRequest
             'seasons' => ['required', 'array', 'min:1'],
             'seasons.*' => ['required', 'integer', 'distinct', 'exists:seasons,id'],
             'name' => ['required', 'string', 'max:255'],
+            'type' => ['required', 'in:semente,produto'],
             'price' => ['required', 'integer', 'min:0', 'max:999999'],
             'days-to-grow' => ['required', 'integer', 'min:1', 'max:30'],
             'regrowable' => ['required', 'boolean'],

@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreSeedRequest;
+use App\Http\Requests\UpdateSeedRequest;
 use App\Http\Resources\SeedResource;
 use App\Services\SeedService;
-use Illuminate\Http\Request;
 
 class SeedController extends Controller
 {
@@ -20,9 +21,9 @@ class SeedController extends Controller
         return SeedResource::collection($seeds);
     }
 
-    public function store(Request $request)
+    public function store(StoreSeedRequest $request)
     {
-        $seed = $this->seedService->create($request->all());
+        $seed = $this->seedService->create($request->validated());
 
         return SeedResource::make($seed->load('seasons:id,name'))
             ->response()
@@ -39,9 +40,9 @@ class SeedController extends Controller
         return SeedResource::make($seed);
     }
 
-    public function update(Request $request, int $id)
+    public function update(UpdateSeedRequest $request, int $id)
     {
-        $seed = $this->seedService->update($id, $request->all());
+        $seed = $this->seedService->update($id, $request->validated());
 
         return SeedResource::make($seed->load('seasons:id,name'));
     }

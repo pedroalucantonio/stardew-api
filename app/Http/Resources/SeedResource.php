@@ -17,6 +17,7 @@ class SeedResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'type' => $this->type,
             'price' => $this->price,
             'days-to-grow' => $this->{'days-to-grow'},
             'regrowable' => $this->regrowable,
