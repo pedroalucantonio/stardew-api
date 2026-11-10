@@ -67,10 +67,10 @@ class SeedSeeder extends Seeder
                 'regrow-days' => 4,
             ],
             [
-                'name' => 'Melon Seeds',
+                'name' => 'Sunflower Seeds',
                 'type' => 'semente',
-                'price' => 80,
-                'days-to-grow' => 12,
+                'price' => 200,
+                'days-to-grow' => 8,
                 'regrowable' => false,
                 'regrow-days' => null,
             ],

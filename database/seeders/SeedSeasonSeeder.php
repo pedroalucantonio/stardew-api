@@ -20,13 +20,13 @@ class SeedSeasonSeeder extends Seeder
             'Kale Seeds' => ['spring'],
             'Strawberry Seeds' => ['spring'],
             'Blueberry Seeds' => ['summer'],
-            'Melon Seeds' => ['summer'],
+            'Sunflower Seeds' => ['summer', 'fall'],
             'Tomato Seeds' => ['summer'],
             'Hot Pepper Seeds' => ['summer'],
             'Corn Seeds' => ['summer', 'fall'],
             'Pumpkin Seeds' => ['fall'],
             'Cranberry Seeds' => ['fall'],
-            'Yam Seeds' => ['fall', 'winter'],
+            'Yam Seeds' => ['fall'],
         ];
 
         foreach ($seedSeasons as $seedName => $seasons) {
